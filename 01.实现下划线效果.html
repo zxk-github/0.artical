@@ -7,6 +7,42 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <div class="box1">
+    <style>
+      .box1 li{
+        position: relative;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        float: left;
+        padding: 0 10px;
+      }
+      .box1 li::before {
+        content:'';
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 0;
+        height: 100%;
+        border-bottom: 2px solid #000;
+        transition: 1s all ease;
+      }
+      .box1 li:hover::before{
+        left:0;
+        width: 100%;
+      }
+      .box1 li:hover ~ li::before{
+        left: 0;
+      }
+
+    </style>
+    <ul>
+      <li>第一个</li>
+      <li>第二个</li>
+      <li>第三个</li>
+      <li>第四个</li>
+      <li>第五个</li>
+    </ul>
+  </div>
 </body>
 </html>
