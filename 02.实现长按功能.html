@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="pressButton"></button>
+    <script>
+        let pressTimer = null;
+        let start = (e) => {
+            console.log(e.type);
+            if(e.type === 'click' && e.button !== 0) {
+                return ;
+            }
+
+            if(pressTimer === null) {
+                pressTimer = setTimeout(() => {
+                    // 执行一个任务
+                    console.log("timer running")
+                }, 1000)
+            }
+
+        }
+
+        let cancel = (el) => {   
+            if(pressTimer !== null) {
+                clearTimeout(pressTimer);
+                pressTimer = null;
+            }
+        }
+
+        let el = document.getElementById('pressButton');
+        
+        // el.addEventListener('click', start);
+        el.addEventListener('mousedown', start);
+        el.addEventListener('click', cancel);
+        el.addEventListener('mouseup', cancel)
+    </script>
+</body>
+</html>
