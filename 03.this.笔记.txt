@@ -82,6 +82,135 @@ this的误解
 this指向函数自身
 this指向函数作用域
 
+ function a() {
+    console.log(this) //window 
+}
+a() 
+window.a() // 这两个实际上是相同的
+
+var o = {
+    a: function() {
+        console.log(this);
+    }
+}
+o.a()  // o this指向调用这个函数的对象
+
+// this在函数定义的时候是确定不了的， 只有在函数执行的时候，才能确定
+
+// window是js的全局对象，我们在全局作用域中定义的变量和函数，实际上就是在window上添加属性和方法
+
+var obj = {
+    a: 10,
+    b: {
+        a: 12,
+        fn: function() {
+            console.log(this.a);
+        }
+    }
+}
+
+window.obj.b.fn();  // 12
+// 1. 如果函数中有this, 但是他没有被所属的对象所调用，那么this指向的就是window
+// 2. 如果函数中有this, 他是直接被所属的对象所调用，那么this指向所属的对象
+
+
+function Fn() {
+    this.user = 'zhang'
+}
+var a = new Fn();
+console.log(a.user)
+// 3. 构造函数中的this: 上面之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将this指向a, 为什么说a是对象，因为用了new关键字就是创建一个对象实例(相当于复制了一份Fn到对象a里面)，此时仅仅是创建包含有Fn的a，并没有执行Fn，然后Fn()执行，调用Fn()这个函数的对象是a,那么this指向的自然是a。那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份
+
+function fn1() {
+    this.user = 'zhang';
+    return {} ;
+}
+var a1 = new fn1();
+console.log(a1.user);
+
+function fn2() {
+    this.user = 'song';
+    return function() {
+
+    }
+} 
+var a2 = new fn2();
+console.log(a2.user);
+
+function fn3() {
+    this.user = 'zhang';
+    return 1;
+}
+var a3 = new fn3();
+console.log(a.user);
+
+function fn4() {
+    this.user = 'zhang';
+    return null;
+}
+var a4 = new fn4();
+console.log(a4.user);
+
+// 当函数返回一个简单数据类型那么this，依旧指向函数的实例。返回的是一个对象，this指向返回的对象
+
+var obj = {
+    fn1: function(){
+        this.user = 'zhang';
+        console.log(this);
+        return {}
+    }
+}
+
+console.log(obj.fn1());
+
+
+// ******************************
+function identify() {
+    return this.name.toUpperCase();
+}
+
+function sayHello() {
+    var greeting = 'Hello, im ' + identify.call(this);
+    console.log(greeting);
+}
+
+var person1 = {
+    name: 'zhang'
+}
+
+var person2 = {
+    name: "song"
+}
+
+identify.call(person1);
+identify.call(person2);
+sayHello.call(person1);
+sayHello.call(person2);
+// 传递一个隐式的对象的引用让代码变得简单
+
+// this并没有引用函数的词法作用域， 的确js的引擎内对词法作用域的实现确实像一个对象，拥有属性和函数，
+// this和函数在哪里定义一点关系没有，和函数的执行有大大的关系
+// this机制的四种规则
+
+
+function doFoo(fn){  
+    fn()
+}
+
+var obj = {
+    foo: function() {
+        console.log(this);
+    }
+}
+doFoo(obj.foo);
+
+function returnThis() {
+    return this;
+}
+
+var boss1 = {name: 'zhang'};
+var boss1Fn = returnThis.bind(boss1);
+console.log(boss1Fn());
 
 
 

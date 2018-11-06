@@ -1,0 +1,29 @@
+容器上有6个属性
+flex-direction 
+决定主轴的方向（即项目的排列方向）
+row  zuoxiangyou 
+row-reverse youxiangzuo
+
+flex-wrap 一条轴线排不下，如何换行
+nowrap 不换行
+wrap 换行
+wrap-reverse 
+
+padding: 10px 20px 30px 10px;
+flex-flow: flex-direction flex-wrap
+
+
+justify-content: 项目在主轴上的对齐方式。
+
+align-item: 定义子集在交叉轴上如何排列
+stretch  父级一个高度 自己不设置高度，自己高度会默认事父级高度
+
+align-content: 
+
+order: 排序
+
+flex-grow 放大比例
+flex-shrink
+flex-basis
+
+align-self: 单独设置某一个的对其方式
