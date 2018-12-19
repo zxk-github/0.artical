@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        div{
+            color: #000;
+        }
+        a{
+            border: 2px solid currentColor;
+            color: currentColor;
+        }
+        div:hover{
+            color: red;
+        }
+
+        .clip{
+            width: 150px;
+            height: 100px;
+            border: 10px solid transparent;
+            padding: 20px;
+            background: #333;
+            background-clip: padding-box;
+            /* box-sizing: border-box; */
+        }
+
+        .shadow {
+            width: 100px;
+            height: 100px;
+            background: #000;
+            box-shadow: 0 0 0 10px red, 0 0 0 10px #333;
+        }
+        /* .dashed-shadow{
+            width: 200px; height: 120px;
+            background: #efebe9;
+            border: 5px solid #B4A078;
+            outline: #B4A078 dashed 1px;
+            outline-offset: -10px;
+            margin-bottom: 20px;
+        } */
+        .dashed-shadow{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            border: 5px solid red;
+            outline: 10px dashed yellow;
+            /* outline-offset: -20px; */
+            border-radius: 10px;
+        }
+        .inline-radius{
+            margin-top: 30px;
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 10px solid red;
+            outline: 10px solid red;
+            outline-offset: -10px;
+        }
+        .shadow-radius{
+            margin-top: 30px;
+            width: 200px;
+            height: 200px;
+            outline: 10px solid red;
+            box-shadow: 0 0 0 10px red;
+            border-radius: 10px;
+            
+        }
+        .background-origin{
+            width: 200px; 
+            height: 200px;
+            padding: 20px;
+            background: url('./test.png') no-repeat ;
+            border: 20px solid transparent;
+            background-origin: content-box;
+        }
+
+        main {
+            width: 100%;
+            padding: 80px 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; 
+        }
+        .progress-outer {
+            width: 60%; height: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative; 
+        }    
+        .progress-enter {  
+            height: inherit;
+            background: rgba(180, 160, 120, .2); 
+        }
+        .progress-bg {
+            width: 60%; 
+            height: inherit;
+            border-radius: 6px; 
+            background: repeating-linear-gradient(-45deg, #D9CFBB  25%, #C3B393 0, #C3B393 50%,
+                            #D9CFBB 0, #D9CFBB 75%, #C3B393 0);
+            background-size: 16px 16px;
+            animation: panoramic 20s linear infinite;
+        }
+        @keyframes panoramic{
+            to {
+            background-position: 200% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="">点击</a>
+    </div>
+    <div class="clip">内容</div>
+    <div>
+        <p>阴影</p>
+        <!-- <div class="shadow"></div> -->
+        <div class="dashed-shadow">asdfasdf</div>
+        <p>阴影</p> 
+    </div>
+    <div class="inline-radius"></div>
+    <div class="shadow-radius"></div>
+    <div class="background-origin"></div>
+    
+    <div class="progress-outer">  <!--更好的扩展-->
+        <div class="progress-enter">
+            <div class="progress-bg"></div>
+        </div>
+        <!-- <span>60%</span> -->
+    </div>
+
+    <div>
+        <style>
+            .linear1{
+                height: 50px; 
+                width: 50px;
+                background-image: linear-gradient(0, blue, red);
+            }
+            .linear2{
+                height: 50px; 
+                width: 50px;
+                background-image: linear-gradient(45deg, blue, red);
+            }
+            .linear3{
+                height: 50px; 
+                width: 50px;
+                background-image: linear-gradient(to left, blue, red);
+            }
+            .linear4{
+                height: 50px; 
+                background: linear-gradient(0, #D9CFBB  25%, #C3B393 0, #C3B393 50%,
+                            #D9CFBB 0, #D9CFBB 75%, #C3B393 0);
+                background-size: 16px 16px;
+            }
+            .linear5{
+                height: 100px;
+                width: 100px;
+                background: linear-gradient(0, red 25%, blue 0, blue 50%, red 0, red 75%, blue 0)
+            }
+            .linear6{
+                height: 100px; 
+                width: 100px;
+                background-image: linear-gradient(0, red 25%, blue 25%, blue 50%, red 50%, red 75%, blue 75%);
+            }
+            .linear7{
+                height: 100px; 
+                width: 100px;
+                background-image: radial-gradient( red 25%, blue 25%, blue 50%, red 50%, red 75%, blue 75%);
+            }
+        </style>
+        <div>
+            <div class="linear1"></div>
+            <div class="linear2"></div>
+            <div class="linear3"></div>
+            <div class="linear4"></div>
+            <div class="linear5"></div>
+            sdaf
+            <div class="linear6"></div>
+            <div class="linear7"></div>
+        </div>   
+        
+        <div>
+            <style>
+                .radial1{
+                    width: 100px;
+                    height: 100px;
+                    background: radial-gradient(circle at 0px 0px, red 25%, blue);
+                }
+                .radial2{
+                    width: 100px;
+                    height: 100px;
+                    background: radial-gradient(10px 20px ellipse at 0px 0px, red 25%, blue);
+                }
+            </style>
+            <div class="radial1"></div>
+            <div class="radial2"></div>
+        </div>
+
+    </div>
+</body>
+</html>

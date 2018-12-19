@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>空心三角形指示箭头</title>
+    <style>
+        .box {
+            position: relative;
+            width: 300px;
+            height: 100px;
+            border: 6px solid #555;
+            border-radius: 20px;
+            margin: 100px auto;
+            background-color: red;
+        }
+
+        /*第一个三角形*/
+        .box::before{  /*这里的伪元素用单冒号和双冒号都一样*/
+            content: '';
+            display: block;
+            position: absolute;
+            top: -26px;
+            left: 80px;
+            border-left: 20px solid transparent ;
+            border-right: 20px solid transparent;
+            border-bottom: 20px solid #555;
+        }
+
+        /*第二个三角形*/
+        .box::after{
+            content: '';
+            display: block;
+            position: absolute;
+            top: -17.6px; /*向下偏移量是矩形边框宽度的1.4（根号2）倍，即8.4，top值为-26-（-8.4）*/
+            left: 80px;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 20px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
+BOM是指浏览器对象模型
+window
+DOM
+navigator
+location
+history
+
+4. 
+区别
+快级元素：独占一行， 宽度默认父级宽度100%， 可以自定宽高 div p h1-h6 ul li ol 
+内联元素：排成一行，宽度靠内容撑起，不支持自定义宽高 a em b strong i span 
+
+5 
+1. 对于有大量icon图片的可以使用雪碧图或者iconfont字体
+2. css js html在打包过程中可以进行压缩混淆，减少文件体积
+3. 打包过程中公共css,js文件提取
+4. 静态公共资源存储到cdn上
+5. 不变化资源使用http, 缓存在用户本地
+6. 数据进行redis，memercache缓存
+
+6. 
+.scale-1px{
+position: relative;
+border:none;
+}
+.scale-1px:after{
+content: '';
+position: absolute;
+bottom: 0;
+background: #000;
+width: 100%;
+height: 1px;
+-webkit-transform: scaleY(0.5);
+transform: scaleY(0.5);
+-webkit-transform-origin: 0 0;
+transform-origin: 0 0;
+}
+
+7.
+方法1  
+.box{
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+方法2 
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box .mid{
+    width: 100px;
+    height: 100px;
+}
+
+8.
+因为浏览器的同源策略导致跨域问题
+解决办法
+1. jsonp
+2. 使用nginx 做代理
+
+9. 
+1. 首先浏览器会拿着郁闷想dns服务器查找当前郁闷所对应的服务器ip
+2. 向ip对应的服务器发送请求，服务拿到数据请求之后，做对应的处理，然后返回对应的html
+3. 浏览器拿到html之后，加载script和link标签对应的资源
+4. html会形成dom树，css会形成cssom,两者进行合并生成render树，然后渲染出页面
+
+10
+因为http是一种间断链接所以服务器需要判断用户是否登陆过网站，以便下次登录时能够实现自动登录所以就出现了cookie
+cookie
+1 保存用户登陆信息
+2）保存上次登录的时间等信息。
+3）保存上次查看的页面
+4）浏览计数
+
+session是保存在服务器上的，专门用来保存用户信息的，通过sessionid来保存不同用户信息
+sessionid 一般加密保存在cookie中
+
+localstorage是html5新加api。用在浏览器端做资源本地存储的，不与参与服务端之间的通信

@@ -1,0 +1,145 @@
+mozilla webkit trident
+
+1. currentColor  当前标签所继承的文字的颜色，凡是需要使用颜色的地方，都可以使用currentColor替换，比如说背景色，渐变色，盒阴影，SVG填充等等
+
+2. background-clip 设置背景颜色所在位置
+border-box  默认值 border+padding+content
+padding-box  padding+content上色 
+content-box  content区域上色
+
+3. box-shadow: h-shadow v-shadow blur spread color insert
+h-shadow 水平阴影位置
+v-shadow 垂直阴影位置
+blur 模糊距离
+spread 阴影尺寸
+color 颜色
+insert 将外阴影变为内阴影
+阴影可以连续设置值，前面的阴影会覆盖后面的
+box-shadow: 0 0 0 10px red, 0 0 0 20px #333;
+
+4. outline 外边框 不占据位置 设置border-radius不会对outline起作用，但是border-radius会对box-shadow起作用
+outline: 5px solid #000;
+outline-offset 这是 外边框带外边的距离，可以为负值，但是会覆盖在内容上
+
+当同时出现outline 和 box-shadow时候，outline会覆盖在box-shadow上
+
+5. background-origin 规定背景图片的原点位置
+border-box  背景为起点 border颜色会覆盖在背景图片上
+padding-box 默认开始位置
+content-box 开始位置为内容位置
+
+6. linear-gradient 
+
+gradient
+linear-gradient 
+radial-gradient
+repeating-linear-gradient
+
+background-image: linear-gradient(to right, blue 20%, red); 
+蓝色从20%的位置开始渐变，这意味着前20%是纯颜色
+background: linear-gradient(0, red 25%, #fff 50% )
+25%位置开始渐变
+50%位置开始变成纯白色是
+25%到50%之间渐变区
+
+background: linear-gradient(0, red 25%, #fff 0, #fff 50%, red 0, red 75% )
+background: linear-gradient(0, red 25%, #fff 0, #fff 50%, red 0, red 75%, blue 0, blue 100% )
+background-image: linear-gradient(0, red 25%, blue 25%, blue 50%, red 50%, red 75%, blue 75%);
+这样会更好理解，在每个div范围内的颜色变化，如果前后的位置一样就不会出现渐变
+
+background: radial-gradient(circle at 0px 0px, red 25%, blue);
+circle at 0px 0px 设置原点位置 也可以是负值
+
+background: radial-gradient(50px 100px ellipse, transparent 40px, yellow 41px, red);
+ellipse 椭圆 横向半径 纵向半径
+
+background: radial-gradient(10px 20px ellipse at 0px 0px, red 25%, blue);
+
+transform 通常和hover使用，一般需要时间触发
+transition 
+animation
+这两个不需要，可以直接在动播放
+
+transition 只能设置开始和结尾时候的状态
+animation 可以设置循环次数，并且可以设置每一帧的样式和时间
+
+transition可以配合js改变样式使用
+
+如果需要针对帧数设置动画，使用animation
+如果仅仅是简单的开始结束状态，使用transition
+如果使用js设置一个样式，需要动画的过度，使用transition
+
+transform 
+rotate 旋转
+skew 扭曲
+scale 缩放
+tanslate 移动
+matrix 矩阵变形
+
+rotate(45deg) 
+transform-origin 定义的是旋转的基点
+left right center 
+top bottom center
+百分比 em px
+
+translate(x, y)
+translateX(x)
+translateY(y)
+
+scale(x, y)
+scaleX(x)
+scaleY(y)
+
+skew(xdeg, ydeg)
+skewX(xdeg)
+skeY(ydeg)
+
+transition 
+
+transition-property none all 元素的属性名
+指定当元素其中一个属性改变时执行transition效果
+none: transition马上停止执行
+all: 元素产生任何属性的变化都将执行transition效果
+元素名称 指定当元素某个属性发生变化的时候，执行transition动画，多个属性使用逗号隔开
+
+transition-duration 延续时间 s ms
+
+transition-timing-function 变换速率的变化 linear ease ease-in ease-out 
+ 
+transition-delay 变换延迟时间 
+当改变元素属性之后多长时间开始执行transition效果
+
+transition: all 0.6s ease 1s
+
+animation 
+keyframes 关键帧
+
+animation-name 动画名称 
+none 没有任何动画效果
+多个动画名称使用逗号隔开
+
+animation-duration 元素动画播放时长
+
+animation-timing-function 元素动画播放方式
+
+animation-delay 动画延时时间
+
+animation-iteration-count 动画播放次数
+number
+infinite 无限
+
+animation-duration 动画播放方向
+normal 每次都是循环向前播放
+alternate 奇数次向前 偶数次向后
+
+animation-play-state 控制元素动画播放的状态
+running 从暂停位置开始播放
+paused 暂停
+
+animation: 'name' 20s ease 2s infinite alternate;
+
+
+
+
+
+
