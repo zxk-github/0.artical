@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        function Dog(age) {
+            this.age = age;
+            this.grade = [1, 2, 3, 4]
+        }
+
+        var d1 = new Dog(12);
+        d1.grade.push(5);
+        var d2 = new Dog(12);
+        console.log(d2.grade);
+        // 1. 创建一个对象
+        // 2. 构造函数内部的this指向这个新创建的对象
+        // 3. 执行函数，往这个新的对象上挂在属性
+        // 4. 返回这个新的对象
+
+        // **** 每次new 都会执行函数，函数内部的所有引用类型都会被重新的声明一次，
+        // 这也是在构造函数内部有引用类型属性的时候，每次创建的实例修改引用类型，不会相互干扰的原因
+
+
+        // 构造函数 原型 实例 三者之间的关系
+        console.log(d1.__proto__ === Dog.prototype);
+        console.log(Dog.prototype.constructor === Dog);  
+        // 上面的这两个ESCMAscript规定的js语法
+
+        console.log(d1.constructor === Dog); 
+        // 就是原型链的一个使用
+
+        // 在new时候，往这个新的创建的对象挂在的仅仅是构造函数中的属性
+        // 当对象.属性的时候，他会看自身有没有，没有会看构造函数中是不是存在这个属性，存在就直接使用，不存在就去构造函数原型上找
+
+        // js三座大山 作用域和闭包 原型和原型链 this 
+        // 作用域和闭包: 他是负责变量的存储，查找和使用 （对变量的使用规则就叫作用域）作用域和写的代码有关系，在js代码解析的时候就已经确定了
+        // this: this仅仅代表当前函数的执行环境(函数的执行上下文) 只在函数执行的时候 才知道this代表啥
+        // 原型链： 继承基础的。他规定了对象属性和方法的查找规则
+        // 面向对象(oop) 它实际上时原型链的实际应用
+
+        // 继承第一种方式 原型的方式
+        function Person1(name) {
+            this.name = name;
+            this.setName = function(name) {
+                this.name = name
+            }
+            this.grade = [11, 12, 13]
+        }
+
+        Person1.prototype.getName = function () {
+            return this.name;
+        }
+        Person1.prototype.address = 'AAA'
+
+        function Boy1(age, name) {
+            this.age = age
+        }
+
+        Boy1.prototype = new Person1('AAA');
+        // 原型的方式很简单粗暴，就是修改需要继承函数的原型
+
+        var tom1 = new Boy1(12);
+        var jerry1 = new Boy1(10);
+        console.log(tom1.name)
+        console.log(jerry1.name)
+        tom1.grade.push(20)
+        console.log(tom1.grade)
+        console.log(jerry1.grade)
+
+        // 问题1: Person1的构造函数内的属性赋值只能执行一次
+        // 问题2: Person1里面如果存在引用类型的数据(数组，json),在一个Boy1的实例里面修改，其他的实例也会变
+        // 问题3: contructor指向存在问题指向了person
+        // 打补丁的修复问题三，手动指向constructor
+        Boy1.prototype.constructor = Boy1;
+
+
+
+
+
+
+        // 继承： 一个构造函数A继承另一个构造函数B，是的new A出来的实例，具有另一个构造函数B的特性
+        // 继承的第二种方式： 构造函数的方式
+        function Person(name) {
+            this.name = name;
+            this.setName = function(name) {
+                this.name = name
+            }
+            this.grade = [11, 12, 13]
+
+        }
+        
+        Person.prototype.getName = function () {
+            return this.name;
+        }
+        Person.prototype.address = 'AAA'
+
+        function Boy(age, name) {
+            Person.call(this, name)
+            this.age = age
+        }
+
+        Boy.prototype.getAge = function() {
+            return this.age;
+        }
+        var tom = new Boy(12, 'Tom');
+        var tom2 = new Boy(10, 'jerry');
+        
+
+        // var obj = new Object();
+        // Boy函数内部的this指向obj这个对象
+        // 执行Boy函数
+        // Boy函数返回一个obj
+        console.log(tom)
+        tom.setName('zhang')
+        console.log(tom)
+        console.log(tom.getName)  // undefined 
+        console.log(tom.address)  //
+        console.log(tom2) 
+
+        
+        // 构造函数的方式实现继承的问题
+        // 问题1: 说明Person上的原型的方法和属性没有被继承到, 但是Person函数内部的属性和方法都能被继承到，所以可以把需要继承的属性和方法都写在构造函数里面
+        // 问题2: 每次是实例化，Person内的函数都会被重新声明一次，这时候是耗费性能的 
+
+        // 原型链的方式会存在引用类型 contructor 只能一次性赋值问题
+        // 构造函数会存在 Person函数每次都会执行，导致Person内部的函数不断进行声明，浪费内存
+
+        // 组合继承(原型链的方式+构造函数方式)
+        function Person3(name) {
+            this.name = name;
+            this.grade = [11, 12, 13]
+        }
+        
+        Person3.prototype.getName = function () {
+            return this.name;
+        }
+
+        function Boy3(age, name) {
+            Person3.call(this, name)
+            this.age = age
+        }
+
+        Boy3.prototype = new Person3()  
+        Boy3.prototype.constructor = Boy3;
+
+        var t4 = new Boy3();
+        // 属性 写在构造函数里面
+        // 方法写在原型上
+        // 好处 
+        // Person3只会new 一次，Person3原型上的方法只会被声明一次，这就解决了构造函数形式的内存问题
+        // Person3构造函数每次new Boy3的时候都会被执行，复杂数据类型每次都会被声明一次，解决了原型链方式的复杂数据类型被串改的问题
+        // 但是依旧存在constructor被串改的问题
+
+        // 问题：
+        //  Person3()在初始化的时候一定会被执行一次， Person3构造函数内部的东西一定会被声明一次，
+        // 在new Boy3()执行 Person3.call(this, name)，已经就能把Person3构造函数内部的东西挂到新创建的这个对象上了
+        // 所以说new Person3() 创建的Person3构造函数内部的东西是无用的，有用的仅仅是原形上的那部分
+
+
+        // 在组合继承的基础上的一个衍生
+
+        // Object.assign()  //对参数中的所有对象的一次拷贝合并成一个对象
+        var obj1 = {a:1, b: 2}
+        var obj2 = obj1;
+        obj2.a = 2;
+        var obj3 = Object.assign({}, obj1, {c: 1}, {d: 3});
+        console.log(obj3)
+        obj3.a = 4;
+        console.log(obj1, obj3)
+
+        function Person3(name) {
+            this.name = name;
+            this.grade = [11, 12, 13]
+        }
+        
+        Person3.prototype.getName = function () {
+            return this.name;
+        }
+
+        function Boy3(age, name) {
+            Person3.call(this, name)
+            this.age = age
+        }
+
+        Boy3.prototype = Object.assign({}, Person3.prototype)
+        // Boy3.prototype.constructor = Boy3; 此时如果没有这不 t4.constructor指向Object
+
+        var t4 = new Boy3();
+
+        // Person3构造函数内的东西在Person3.call(this, name)就可以得到继承，所以只需要解决原形链上的东西就可以了
+        // 原形链本质是一个对象, 拷贝一份给Boy3
+    
+        
+        
+    </script>
+</body>
+</html>

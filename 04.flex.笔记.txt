@@ -1,29 +1,81 @@
+使用flex之后，子元素的float clear vertical-align将失效
+
 容器上有6个属性
-flex-direction 
-决定主轴的方向（即项目的排列方向）
-row  zuoxiangyou 
-row-reverse youxiangzuo
+display: flex
+行内元素 display: inline-flex;
 
-flex-wrap 一条轴线排不下，如何换行
-nowrap 不换行
+flex-direction 决定主轴的方向
+row row-reverse column column-reverse
+
+flex-wrap
+默认各元素会排成一行
+1. 宽度够时会按照设置宽度显示， 
+2. 宽度不足时会按照宽度比例平分父级宽度
+3. 不设置宽度，元素宽度是0
+
+nowrap 不换行，默认
 wrap 换行
-wrap-reverse 
-
-padding: 10px 20px 30px 10px;
-flex-flow: flex-direction flex-wrap
+wrap-reverse 换行，第一行在下方
 
 
-justify-content: 项目在主轴上的对齐方式。
+flex-flow
+flex-direction和flex-wrap的简写
 
-align-item: 定义子集在交叉轴上如何排列
-stretch  父级一个高度 自己不设置高度，自己高度会默认事父级高度
 
-align-content: 
+justify-content
+flex-start 左对齐 
+flex-end 右对齐
+center 居中
+space-between 两端对齐，项目之间的间隔相等 
+space-around 每个项目的间隔相等，项目之间的距离比项目到父级之间的距离大一倍
 
-order: 排序
 
-flex-grow 放大比例
-flex-shrink
+align-items
+flex-start
+flex-end
+center 
+stretch
+baseline
+
+
+align-content
+
+项目上的属性
+order 排列方式，值越小在前面 默认 0
+
+
+flex-grow 属性定义项目的放大比例， 默认0，即存在剩余空间也不放大
+如果其他是0， 其中一个非0， 非0的将占据全部的剩余空间
+如果一个项目都为1(相同的值) ，则将等分剩余空间
+如果一个是2，其他为1，则前者占据剩余空间是后者的2倍
+
+
+flex-shrink 
+属性定义了项目的缩小比例，默认1，即如果空间不足，该项目将缩小
+都为1 当空间不足，都将等比例缩小
+如果有一个是0，其他是1， 当屏幕缩小的时候第一个不变其他等比例缩小
+
+
 flex-basis
+定义在分配多余的空间之前，项目占据的主轴空间
+浏览器根据这个属性，计算主轴是否有多余空间
 
-align-self: 单独设置某一个的对其方式
+设置了flex-basis之后，width不再起作用 
+
+
+flex
+flex: flex-grow flex-shrink flex-basis
+
+
+align-self
+设置某一个项目在垂直方向上和其他项目不一样的排列方式，可以覆盖父级的align-items属性效果
+auto
+flex-end 
+flex-start
+center
+baseline
+stretch
+
+
+
+

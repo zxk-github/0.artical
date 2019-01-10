@@ -6,43 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .box{
-            width: 700px;
+        .box {
             display: flex;
-            flex-direction: row;
-            /* flex-wrap: wrap-reverse; */
-            justify-content: space-around;
-            align-items: stretch;
-        }
-        .box div{
-            width: 100px;
-            height: 50px;
+            position: relative;
+        }        
+        p{
+           width: 100px;
+            height: 100px;
             border: 1px solid #000;
+            flex-shrink: 0;
+            /* flex-basis: 2000px; */
         }
-        .span-box{
-            display: inline-flex;
+        .wid{
+            flex-shrink: 1;
+            width: 100000px;
         }
     </style>
 </head>
 <body>
     <div class="box">
-        <div style="height: 300px;">111</div>
-        <div style="width: 200px;">222</div>
-        <div style="height: 50px;">333</div>
-        <div style="height: 250px">444</div>
+        <p class="left">1`2321</p>
+        <p class="wid"></p>
+        <p></p>
     </div>
-    <a href="javascript:;" class="span-box">
-
-    </a>
-    .active{
-        asdfsdfsdfasdfsaf
-    }
-    <li class="active">dsa</li>
-    <li>dsa</li>
-    <li>dsa</li>
-    <li>dsa</li>
-    <li>dsa</li>
-    </var>
     
 </body>
 </html>

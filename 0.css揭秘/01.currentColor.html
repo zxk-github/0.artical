@@ -203,6 +203,118 @@
             <div class="radial2"></div>
         </div>
 
+        <div >
+            <style>
+                .radius1{
+                    width: 100px;
+                    height: 100px;
+                    background: red;
+                    border-radius: 50%;
+                }
+                .radius2{
+                    width: 100px;
+                    height: 100px;
+                    background: red;
+                    border-radius: 50% / 100% 0;
+                }
+                .radius3{
+                    width: 300px;
+                    height: 150px;
+                    background: red;
+                    border-radius: 50%/100% 100% 0 0 ;
+                }
+            </style>
+            <div class="radius1"></div>
+            <div class="radius2"></div>
+            <div class="radius3"></div>
+        </div>
+
+        <div>
+            <style>
+                .diamond{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid #eee;
+                }
+                .diamond > div{
+                    width: 150px;
+                    height: 150px;
+                    color: white;
+                    display: inherit;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                }
+                .diamond:nth-of-type(1) > div{
+                    transform: skewX(-45deg);
+                    background: #b4a078;
+                }
+                .diamond:nth-of-type(1) > div > span{
+                    transform: skewX(45deg);
+                }
+            </style>
+            <div>
+                <div class="diamond">
+                    <p>① nested element</p>
+                    <div><span>diamond</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <style>
+                .diamond1 > img{
+                    width: 300px; height: 150px;
+                    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+                    transition: 1s clip-path;
+                }
+                .diamond2 {
+                    width: 300px; height: 150px;
+                    background: red;
+                    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+                }
+            </style>
+            <div class="clip1">
+                <div class="diamond1">
+                    <div>diamond</div>
+                    <img src="./test.png" alt="">
+                </div>
+                <div class="diamond2">
+                    
+                </div>
+            </div>
+
+            <div>
+                <style>
+                    .cut-cor1{
+                        width: 300px;
+                        height: 200px;
+                        background: linear-gradient(45deg, transparent 15px, red 15px ) bottom left;
+                        background-size: 50% 50%;
+                        background-repeat: no-repeat;
+                    }
+                    .cut-cor2{
+                        width: 300px;
+                        height: 200px;
+                        background: radial-gradient(circle at bottom left, transparent 15px, red 15px) bottom left no-repeat;
+                        background-size: 50% 50%;
+                    }
+                    .cut-cor3{
+                        width: 300px;
+                        height: 200px;
+                        background: red;
+                        clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+                    }
+                </style>
+                <div class="cut-cor1"></div>
+                <div class="cut-cor2"></div>
+                <div class="cut-cor3"></div>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>

@@ -215,7 +215,17 @@ console.log(boss1Fn());
 
 
 
+1. 全局指向window 
+console.log(this) //window
 
+2. 函数中的this
+function fn() {
+    console.log(this)
+}
+fn() // window 
+严格模式下，函数中this指向undefined
+
+pagination
 
 
 

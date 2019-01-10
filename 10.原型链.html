@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Super(name) {
+            this.name = name;
+            this.getName = function() {
+                return this.name;
+            }
+        }    
+
+        function Sub(name, age) {
+            Super.call(this, name)
+            this.age = age;
+        }
+
+        var ins = new Sub('zhang', 12);
+        console.log(ins);
+        console.log(ins.getName());
+        var ins1 = new Sub('song', 11)
+        console.log(ins1.getName())
+        
+    </script>
+</body>
+</html>

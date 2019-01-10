@@ -93,6 +93,7 @@ scaleY(y)
 skew(xdeg, ydeg)
 skewX(xdeg)
 skeY(ydeg)
+当元素skew的时候，子元素一样，如果需要矫正子元素，这时候可以反向skew
 
 transition 
 
@@ -138,8 +139,19 @@ paused 暂停
 
 animation: 'name' 20s ease 2s infinite alternate;
 
+border-radius
+border-radius可以指定水平半径和垂直半径
+border-radius: 50% / 100% 100% 0 0 ; 半圆
+左上角
+水平半径是宽度的一般
+垂直半径是高度全部 
 
 
-
-
+clip-path 裁剪区域，坐上为0,0点，可以是像素可以是百分比
+polygon 根据坐标点依次连线，最终得到的区域就是遮罩区域
+width: 300px; height: 150px;
+background: red;
+clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+顺时针，不同点之间进行逗号隔离，(x, y)
+要想实现变换的动画，必须变换前后的点数量一样，否则没有动画
 

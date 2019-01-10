@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function f(a, b, c) {
+            a = 2;
+            b = 3;
+            c = 4;
+            delete a;
+            arguments[0] = 5;
+            delete arguments[1];  // 删了就删了联系了
+            arguments[1] = 6;
+
+            console.log(a, b, arguments)
+
+            return [a, b, c, arguments[0], arguments[1], arguments[2]];
+        }
+        console.log(f(1, 1));
+
+
+
+
+
+
+
+
+
+        var length = 10;
+        function fn() {
+            console.log(this.length);
+        }
+        var obj = {
+            length: 5,
+            method: function(fn) {
+                fn();
+                arguments[0]();
+            }
+        }
+        obj.method(fn, 1);
+
+        // 作用域   作用域链/闭包   执行上下文
+
+        // 作用域： 变量的保存，使用，修改的规则就叫作用域 
+
+        var a = 1;
+        function fn() {
+            var a = 2;
+            console.log(a);
+        }
+        fn();
+
+        //  作用域分两种
+        // 全局作用域 函数作用域 
+        // 全局作用域：全局范围内  window
+        // 函数作用域： 函数体内部 function
+        
+        // 作用域在js代码写的时候，就已经确定了，不能因为函数的执行时机不同而修改
+
+
+        // 变量的查找规则这个链路就叫作用域链  
+        // 就近原则
+
+        // *** 会画作用于图
+        
+
+        // var声明的变量， function关键字申明的函数都会进行预解析
+        // 特点：函数是js的一等公民，会覆盖任何相同名字的变量, 这个特性仅仅实在预解析的阶段成立
+        // js代码的执行阶段不成立，后面的会覆盖前面的，这时候就不论是不是函数还是变量了
+
+        function fn2() {
+            console.log(22)
+        }
+        // 预解析结束之后 fn2=xx21
+
+// 现在代码开始执行了
+
+        fn2 = 123;
+        console.log(fn2);
+        // 分析： 函数的fn2  fn2变量的声明
+        
+
+        // 'a' in window
+        
+
+        // // 任何的变量 函数 都是window的一个属性或者方法
+        // var a = 1; 
+
+        window.a = 1;
+
+        // in 判断一个东西是不是一个对象的属性
+
+        var obj3 = {
+            a : 1
+        }
+        console.log('a' in obj3)  // 判断a是不是obj3的一个属性 boolean
+        
+
+        // 第一题
+
+        // if('b' in window) {
+        //     var d = 'hello';
+        // }
+        // console.log(d);
+
+        // 解析阶段做了啥 申明了变量a
+        // 执行阶段做了啥 1. 判断a是不是window的一个属性
+ 
+
+        // console.log( func );
+        // var func = 123;
+        // console.log( func );
+        // function func() {
+        //     console.log( 'Hello js' );
+        // }
+        // console.log(func)
+        // function func() {
+        //     console.log( 'Hello' );
+        // }
+
+
+
+        // var function 这个关键字声明的标识符 会提升
+        // 解析阶段  扫描全部代码，找到全局作用域中的var function 然后进行申明
+        // 代码执行阶段 就是一行一行执行代码，遇到复制进行复制，遇到函数执行函数
+
+        function func1 ( num ) {
+            
+            console.log( num );
+            var num = 456;
+            console.log( num );
+        }
+        var num = 123;
+        func1( num );
+
+        function func2 () {
+            console.log( num );
+            var num = 456;
+            console.log( num );
+        }
+        var num = 123;
+        func2( num );
+
+        
+
+        function func3 () {
+
+            
+            console.log( num );
+            num = 456;
+            console.log( num );
+        }
+        var num = 123;
+        func3( num );
+        console.log( num );
+
+
+        var f = 123;
+        function fn5() {
+            var f = 345;
+            console.log(f);
+        }   
+        fn5(f)
+
+        // 预解析的时候 变量和函数的声明
+        // 代码执行阶段：一行一行执行代码，会忽略var 关键字 和函数声明部分的代码。会执行变量的赋值和在函数调用的时候执行函数
+        var num = 123;
+        function f1 () {
+            console.log( num );  
+        }
+        function f2 () {
+            var num = 456;
+            f1();
+        }
+        f2();
+        console.log( num );
+        
+        // 作用域定义： 保存，使用变量的规则叫作用域，说白了，变量如何用是作用域决定了
+        // 特性： 1. 就近原则，现在当前作用域找，找不到回去外层找，再找不到报错
+        // 特性2: 再代码的预解析阶段就已经确定了作用域，和代码如何执行无关(这条也是和this的最大区别，this是活的，作用域是死的)
+        // 说白了 就是在你写代码的时候就已经确定了作用域是啥 ！
+
+        
+
+
+        // 函数声明是通过 
+        // function 函数名() {
+
+        // }
+
+        // 函数的调用 函数名();
+
+        // var a = 函数名();   先执行函数，然后把函数的执行结果(return 出来的值就是函数的执行结果，如果一个函数没用return, 那这个函数的执行结果就是undefined)赋值给变量a, 
+
+
+        function r1() {
+            console.log(1);
+        }
+        console.log(f1());
+
+        function f2() {
+            console.log(2);
+            return [2];
+        }
+
+        console.log(f2());  // 一个函数只能返回一个值，值可以是任何数据类型，遇到return， return之后的代码不再执行
+    
+
+        var a = 4;
+        function fn3() {
+            var a = 1;
+            function fn4() {
+                a++;
+                return a;
+                a++;
+            }
+            return fn4;
+        }
+
+        var g = fn3();
+        console.log(g());
+    
+
+        var num = 123;
+        function f1 () {
+            console.log( num );  
+        }
+        function f2 () {
+            var num = 456;
+            function fn3() {
+                console.log(num);
+            }
+            f1();
+            return fn3;
+        }
+        
+        var rfn1 = f2()
+        rfn1();
+        console.log( num );
+
+
+        // 这就是一个典型的闭包
+
+
+    </script> 
+</body>
+</html>

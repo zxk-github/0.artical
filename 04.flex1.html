@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        容器上设置6个属性可以设置
+        flex-diraction 指明水平轴的方向
+        row row-reverse column column-reverse
+        flex-wrap 当父级宽度不够的时候，子级是否换行
+        nowrap wrap wrap-reverse
+        flex-flow: <flex-direction> <flex-wrap> // 简写没有啥意义
+        justify-content: 子级在水平方向上如何排列
+        flex-start flex-end    center space-between space-around
+        align-items 子级在竖直方向上如何排列
+        flex-start flex-end center stretch baseline
+
+        子级上的属性
+        order: 顺序 数值小的在前面，大的在后面
+
+        flex-grow
+        默认值0，如果存在空间 也不放大
+        如果设置1， 只是平分剩余空间
+        如果有一个是2， 其他是1， 2的要比1 多分剩余空间
+        如果有一个是非0， 其他的都是0，不是0的将独占所有的剩余空间
+
+        flex-shrink
+        当父级空间不足的时候，会缩小多少
+        默认是1 空间不足大家一块默认按宽度比例缩小
+        有一个是0 其他是1 0的不缩小 其他的按照宽度的比例缩小
+
+        flex-basis  在分配多余空间之前，元素所占的比例
+        宽度和flex-basis 同时存在的时候，width不起作用
+
+        flex flex-grow flex-shrink flex-basis
+
+        align-self 设置某一个在竖直方向的位置
+    -->
+     <style>
+         ul, li{
+             margin:  0;
+             padding: 0;
+             list-style: none;
+         }
+        .box{
+            width: 800px;
+            height: 300px;
+            background: red;
+            display: flex;
+            /* flex-wrap: wrap-reverse; */
+            /* flex-direction: column; */
+        }
+        li{
+            border: 1px solid #000;
+            width: 100px;
+            height: 100px;
+            flex-shrink: 1;
+        }
+        .shr{
+            /* width: 400px; */
+        }
+        .hei{
+            width: 200px;
+            /* flex-shrink: 0; */
+            flex-basis: 300px;
+            
+        }
+     </style>
+     <ul class="box">
+         <li>1</li>
+         <li>2</li>
+         <li class="shr">3</li>
+         <li>4</li>
+         <li class="hei">5</li>
+     </ul>
+
+</body>
+</html>
