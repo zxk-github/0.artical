@@ -1,0 +1,107 @@
+2. vue双向数据绑定object.definedproperty
+
+
+实例创建： 
+beforeCreate 阶段,进行vue实例配置项的实例化
+created 进行data和methods的出事化，vue 实例还没有的挂载元素 el 。
+挂载阶段：在 beforeMount 阶段，vue 实例的$el 和 data 都初始化了，
+但还是挂载之前为虚拟的 dom 节点，
+在 mounted 阶段，vue 实例挂载完成，数据 成功渲染。
+数据更新：
+当 data 变化时，会触发 beforeUpdate 和 updated 方法。
+实例销毁：在执行$destroy(）方法， 值行，destroy 方法后，
+
+axios配置项
+{
+  url: '/user',  是用于请求的服务器 URL
+  
+  method: 'get', 请求的方法，默认是 get
+ 
+  params: {
+  },  //参数
+  data: {
+  }, // post请求的时候，给后端的数据
+
+}
+
+
+7. 
+computed 
+1. 初始化时候会执行一次， 
+2. 当属性的依赖项发生变化的时候，就会值行一次，依赖不变化，只会从缓存中找
+
+watch
+1. 初始化默认不会值行，配置了imediate为true，会执行一次
+2. 只会监听data中的数据，当数据变化的时候，执行一次
+
+8. 不会
+因为vue只会监听data已经声明的对象的数据，没有声明不会监听
+数组仅仅是变异的实现了push, pop, shift unshift splice等方法
+直接通过[]不会触发改变，通过$set或者vue.set添加
+
+
+
+11 
+for 循环 可以使用brack跳出
+foreach 方法没办法使用 break 语句跳出循环，只能return从函数体内返回
+for-of支持所有实现iterator接口的数据的遍历
+for in 可以进行json和数组的遍历
+
+12 
+number string undefined null boolean 
+创建对象 new  和 {}
+
+14 
+浅拷贝仅仅是对象指针的复制
+深拷贝是重新创建一份
+
+function deepCopy(data){
+    let newData=Array.isArray(data)?[]:{};
+
+    if(typeof data ==="object"){
+        let keys = Object.keys(data);
+        keys.forEach((key, index) => {
+            newData[key]=typeof data[key]==='object' ? deepCopy(data[key]) : data[key];
+        })
+    }
+    return newData
+}
+
+200 (成功) 服务器已成功处理了请求
+301 请求的网页已永久移动到新位置。
+304 自从上次请求后，请求的网页未修改过，可以使用缓存
+401 需要请求要求身份验证
+403 服务器拒绝请求。
+404 服务器找不到请求的网页。
+500 服务器遇到错误，无法完成请求。
+502 网关错误
+503 服务器暂时无法使用(由于超载或停机维护)
+
+
+null和undefined的区别
+null 表示无的一个对象
+undefined 表示无的原始值
+在语言的设计上，null延续了java和c的特性，调用Number会转换成0
+undefined调用Number会被转换成NaN
+使用上区别
+null 作为对象Object.prototype.__proto__的值
+undefined表示缺少值
+1. 变量被申明了，但是没有赋值时，是undefined
+2. 调用函数时，没有传入实参，形参的值是undefined
+3. 对象没有赋值的属性，值是undefined
+4. 函数不存在返回值是，默认返回undefined
+
+作用域指的是变量可以被访问到的区域，规定了如何查找变量的规则，确定了当前执行代码对变量的访问权限
+js采用的是词法作用域也就是静态作用域
+静态作用域：在函数定义的时候就确定了
+动态作用域：在函数执行的时候才能决定
+
+可执行代码
+全局代码 函数代码 eval代码 执行上下文
+
+执行上下文栈函数执行push到栈中，执行完毕pop()
+
+一段可执行代码会创建一个执行上下文
+
+
+

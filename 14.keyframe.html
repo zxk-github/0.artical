@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @keyframes pulse {
+            0% {
+                background-color: red;
+                opacity: 1.0;
+                transform: scale(1.0) rotate(0deg);
+            }
+            33% {
+                background-color: blue;
+                opacity: 0.75;
+                transform: scale(1.1) rotate(-5deg);
+            }
+            67% {
+                background-color: green;
+                opacity: 0.5;
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                background-color: red;
+                opacity: 1.0;
+                transform: scale(1.0) rotate(0deg);
+            }
+        }
+
+        .pulsedbox {
+            height: 200px;
+            width: 100px;
+            animation-name: pulse;
+            animation-duration: 4s;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="pulsedbox"></div>
+    <button id="btn">click</button>
+</body>
+
+<script>
+    var box = document.getElementById('pulsedbox');
+    var btn = document.getElementById('btn');
+    btn.onclick = function() {
+        box.classList.add('pulsedbox')
+    }
+
+</script>
+</html>

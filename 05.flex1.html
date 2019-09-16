@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        .box{
+            display: flex;
+            height: 100%;
+        }
+        .main {
+            width: 100%;
+        }
+        .left{
+            width: 200px;
+            flex: 1 0 200px;
+            order: -1;
+        }
+        .right{
+            width: 300px;
+            flex: 1 0 300px;
+        }
+
+    </style>
+    <div class="box">
+        <div class="main">main</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+    <script>
+        function forEach(data) {
+            const keys = Object.keys(data);
+            for(let i = 0; i < keys.length; i++) {
+                if(typeof data[keys[i]] === 'object') {
+                    forEach(data[keys[i]])
+                } else {
+                    console.log(data[keys[i]])
+                }
+            }
+        }
+
+        var arr = [1, 3, {a: 4, b: {c: 5}}]
+        forEach(arr)
+    </script>
+
+    <script>
+        var a = [1, 2, 3, 4, 5];
+        var b = [3, 4, 10]
+
+        b.forEach((el) => {
+            const index = a.findIndex((ele) => {
+                return ele === el
+            })
+            console.log(index)
+        })
+        
+    </script>
+</body>
+</html>

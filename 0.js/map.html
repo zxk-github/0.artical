@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3D 气泡图 - 全国市县位置</title>
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="container">
+</div>
+<!--<script src="./script/loca.js"></script>-->
+<script src="//webapi.amap.com/loca?v=1.2.0&key=您申请的key值"></script>
+<script src="//a.amap.com/jsapi_demos/static/citys.js"></script>
+<script>
+    var map = Loca.create('container', {
+        mapStyle: 'amap://styles/grey',
+        zoom: 5,
+        center: [107.4976, 32.1697],
+        features: ['bg', 'road'],
+        pitch: 50,
+        // Loca 自 1.2.0 起 viewMode 模式默认为 3D，如需 2D 模式，请显示配置。
+        // viewMode: '3D',
+    });
+
+    map.on('mapload', function () {
+        map.getMap().plugin(['AMap.ControlBar'], function () {
+            var controlBar = new AMap.ControlBar();
+            map.getMap().addControl(controlBar);
+        });
+    });
+
+    var layer = Loca.visualLayer({
+        container: map,
+        type: 'point',
+        shape: 'circle'
+    });
+
+    layer.setData(citys, {
+        lnglat: 'lnglat'
+    });
+
+    layer.setOptions({
+        style: {
+            // 支持动态回调，为每一个点设置半径
+            radius: function (obj) {
+                // 城市类型，0：省会直辖市，1：地级市，2：区县
+                var style = obj.value.style;
+                var r;
+                if (style == 0) {
+                    r = 6;
+                } else if (style == 1) {
+                    r = 3;
+                } else {
+                    r = 1.5;
+                }
+
+                return r;
+            },
+            color: '#47aff7',
+            borderColor: '#c3faff',
+            borderWidth: 1,
+            opacity: 0.8
+        }
+    });
+
+    layer.render();
+
+</script>
+</body>
+</html>

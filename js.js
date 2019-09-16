@@ -1,7 +1,1 @@
-var a = [];
-for(var i = 0; i < 5; i++) {
-    a.push(function() {
-        console.log(i);
-    })
-}
-a[1]();
+console.log("i have a black dog".split("").reverse().join("-"));

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="content">
+            <h4 class="name">a namea namea namea namea</h4>
+        </div>
+        <div class="content">
+             <h4 class="name">b namea namea namea namea </h4>
+        </div>
+        <div class="content">
+             <h4 class="name">c namea</h4>
+        </div>
+    </div>
+    
+    <style type="text/css">
+    .main {
+        display: flex;
+    }
+    .content {
+        overflow: hidden;  /*也可以用 width:0 代替*/
+        flex: 1;   /*关于flex的属性值请看官网，这里相当于 flex-grow */
+        border:1px solid red;
+    }
+    .name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    </style>
+</body>
+</html>

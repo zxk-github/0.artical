@@ -1,0 +1,70 @@
+3. 
+方式1: 浮动元素父级 加上overflow: hidden
+方法2: 浮动元素同级添加一个块级的元素，并且设置css为clear: both;
+通过::after{
+    content: '';
+    display: block;
+    clear:both;
+}
+
+4: 相同点： 两个都是根据某一个参照物定位
+不同点： absolute 是根据属性为position:relative最近的父级定位，如果所有父级都没有position:relative，那就根据body定位
+fixed是直接根据浏览器的窗口定位
+
+7.  通过设置了keep-alive，会将组件进行缓存，当再次回到当前组件页面，只会加载缓存中之前已经渲染好的页面，而不会再次重新加载页面，不会再触发页面一种的created等类似的钩子函数，除非自己重新刷新该页面。
+
+8: 
+动态路由定义
+{
+    path: '/user/:id',
+    component: User,
+}
+使用：
+/user/1
+或者
+this.$router.push({ path: '/user', params: { id: 1 }})
+
+获取参数
+this.$route.params.id 获取 
+
+9: 
+链接激活时使用的 CSS 类名
+
+
+嵌套路由的定义
+{
+    path: '/product',
+    conponent: Product,
+    children: [
+        path: 'detail/:id',
+        conponent: ProductDetail
+    ]
+}
+
+
+13: 
+(1) 1020
+(2) 
+
+
+9 
+在路由被激活的时候，会在组件的最外层元素添加一个router-link-active的css类，方便用于路由被激活的时候，改变组件的样式
+
+
+8
+function clone(data){
+    let newData=Array.isArray(data)?[]:{};
+
+    if(typeof data ==="object"){
+        let keys = data.keys();
+        keys.forEach((key, index) => {
+            newData[key]=typeof data[key]==='object' ? deepClone(data[key]) : data[key];
+        })
+    }
+    return newData
+}
+
+let a=[{c:1},2,3,4],
+b=deepClone(a);
+a[0]={c:2};
+console.log(a,b);
